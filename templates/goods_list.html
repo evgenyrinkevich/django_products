@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Единица измерения</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Дата поступления</th>
+            <th scope="col">Поставщик</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list%}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ object.name|title }}</td>
+            <td>{{ object.measure }}</td>
+            <td>{{ object.price }}</td>
+            <td>{{ object.receipt_date }}</td>
+            <td>{{ object.supplier|title }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button id="add-product" type="button" class="btn btn-primary">Добавить товар</button>
+{% endblock %}
