@@ -19,3 +19,4 @@ class ProductListView(TitlePageMixin, ListView):
     title = 'products'
     template_name = 'goods_list.html'
     queryset = Product.objects.all()
+    ordering = ['-receipt_date']
