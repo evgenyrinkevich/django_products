@@ -11,7 +11,6 @@
             <th scope="col">Цена</th>
             <th scope="col">Дата поступления</th>
             <th scope="col">Поставщик</th>
-            <th scope="col">Категории</th>
         </tr>
         </thead>
         <tbody>
@@ -24,13 +23,6 @@
                 <td>{{ object.receipt_date }}</td>
                 <td>{{ object.supplier|title }}</td>
                 <td>{{ object.supplier|title }}</td>
-                <td>
-                    <ul>
-                        {% for category in object.category.all %}
-                            <li>{{ category.name }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

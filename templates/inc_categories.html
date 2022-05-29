@@ -1,0 +1,10 @@
+<div class="categories">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        {% with request.resolver_match as req_info %}
+        <a class="navbar-brand {% if req_info.url_name == 'index' %}active{% endif %}" href="{% url 'products:index' %}">All Products</a>
+        {% for category in categories %}
+            <a class="navbar-brand {% if req_info.url_name == 'category' and req_info.kwargs.pk == category.id %}active{% endif %}" href="{% url 'products:category' category.id %}">{{ category.name }}</a>
+        {% endfor %}
+        {% endwith %}
+    </nav>
+</div>
