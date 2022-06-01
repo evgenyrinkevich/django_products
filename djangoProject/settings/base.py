@@ -13,19 +13,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)w&qa1g+k6%)3x98h_%#jmuvz3&ihs=gi!cfvw!=jv-0#5_mc$'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,12 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # local
     'products.apps.ProductsConfig',
     'hitcount.apps.HitcountConfig'
 ]
-
 
 
 MIDDLEWARE = [
@@ -51,6 +43,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'hitcount.middleware.hit_count_middleware'
@@ -148,5 +141,7 @@ LOGGING = {
     # }
 }
 
-
+# Site version constants
+ENGLISH_SITE_ID = 1
+RUSSIAN_SITE_ID = 2
 
