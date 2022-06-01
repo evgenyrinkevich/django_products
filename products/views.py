@@ -1,3 +1,4 @@
+from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import ListView
 from django.views.generic.base import ContextMixin
 
@@ -6,7 +7,7 @@ from products.models import Product, Category
 
 class PageContextMixin(ContextMixin):
     title = ''
-    categories = Category.objects.all()
+    categories = Category.on_site.all()
 
     def get_context_data(self, **kwargs):
         context = super(PageContextMixin, self).get_context_data(**kwargs)
@@ -20,7 +21,7 @@ class ProductListView(PageContextMixin, ListView):
     title = 'products'
     template_name = 'goods_list.html'
     ordering = ['-receipt_date']
-    queryset = Product.objects.prefetch_related('category').all()
+    queryset = Product.on_site.prefetch_related('category').all()
 
 
 class ProductCategoryListView(PageContextMixin, ListView):
@@ -31,9 +32,9 @@ class ProductCategoryListView(PageContextMixin, ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk')
-        self.title = Category.objects.filter(id=category_pk).first().name
+        self.title = Category.on_site.filter(id=category_pk).first().name
         if category_pk:
-            return Product.objects.filter(category__in=[category_pk])
+            return Product.on_site.filter(category__in=[category_pk])
         else:
-            return Product.objects.all()
+            return Product.on_site.all()
 
