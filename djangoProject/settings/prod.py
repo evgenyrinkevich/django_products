@@ -11,5 +11,17 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-
 SITE_ID = ENGLISH_SITE_ID
+
+STATIC_URL = "/static/"
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'products',
+        'USER': 'django',
+        'PASSWORD': 'geekbrains',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
+}

@@ -3,6 +3,8 @@ from django.contrib.sites.models import Site
 from django.contrib.sites.managers import CurrentSiteManager
 from django.db.models import Manager
 
+from djangoProject.settings.base import MEDIA_ROOT
+
 
 class Product(models.Model):
     name = models.CharField(max_length=128, verbose_name='название')
@@ -11,6 +13,7 @@ class Product(models.Model):
     receipt_date = models.DateField(auto_now_add=True, verbose_name='дата поступления')
     supplier = models.CharField(max_length=128, verbose_name='поставщик')
     category = models.ManyToManyField('Category')
+    image = models.ImageField(upload_to='product_images', verbose_name='изображение', default='default_product.png')
     sites = models.ManyToManyField(Site)
     objects = Manager()
     on_site = CurrentSiteManager('sites')
