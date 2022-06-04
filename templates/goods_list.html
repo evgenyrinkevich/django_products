@@ -6,6 +6,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Изображение</th>
             <th scope="col">Название</th>
             <th scope="col">Единица измерения</th>
             <th scope="col">Цена</th>
@@ -18,6 +19,7 @@
         {% for object in object_list %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
+                <td><img alt="no image" src="{{ object.image.url }}"/></td>
                 <td>{{ object.name|title }}</td>
                 <td>{{ object.measure }}</td>
                 <td>{{ object.price }}</td>

@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    privileged: true
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: products
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: geekbrains
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+    privileged: true
+    restart: always
+    volumes:
+      - ./media_files:/media
+    expose:
+      - 8000
+    command: bash -c "
+      while !</dev/tcp/db/5432; do sleep 1; done;
+      python manage.py migrate &&
+      gunicorn djangoProject.wsgi -b 0.0.0.0:8000
+      "
+    environment:
+      DJANGO_SETTINGS_MODULE: djangoProject.settings.site_en
+    depends_on:
+      - db
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./media_files:/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - backend
