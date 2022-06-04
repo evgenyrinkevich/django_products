@@ -1,0 +1,14 @@
+.table {
+    margin-top: 1em;
+}
+
+#add-product {
+    margin-top: 1em;
+}
+
+.active {
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    padding: 5px;
+}
